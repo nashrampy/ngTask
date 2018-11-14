@@ -1,0 +1,49 @@
+<form [formGroup]="postForm">
+  <div class="row">
+    <label for="title">Title* :</label>&nbsp;
+    <input
+      type="text"
+      placeholder="Enter Title"
+      size="30"
+      formControlName="title"
+      maxlength="24"
+      placeholder="Title"
+      name="title"
+      id="title"
+    />
+  </div><br>
+  <div
+    *ngIf="
+      postForm.controls.title.touched &&
+      !postForm.controls.title.pristine &&
+      postForm.controls.title.errors
+    "
+  >
+    Field cannot be empty, Alphanumeric only and maximum of 24 characters only.
+  </div><br>
+  <div class="row">
+    <label for="body">Body* :</label>&nbsp;
+    <textarea
+      placeholder="Enter msg"
+      formControlName="body"
+      cols="30"
+      maxlength="50"
+      rows="10"
+    ></textarea>
+  </div><br>
+  <div
+    *ngIf="
+      postForm.controls.body.touched &&
+      !postForm.controls.body.pristine &&
+      postForm.controls.body.errors
+    "
+  >
+    Field cannot be empty, maximum of 50 characters can be entered.
+  </div> <br>
+  <button type="submit" (click)="onPost()" [disabled]="!postForm.valid">
+    Submit
+  </button> <br><br>
+  <button type="submit" class="buttons orange" (click)="returnToPosts()">Return To Posts</button>
+  <button type="submit" class="buttons red" (click)="postForm.reset()">Reset Form</button>
+</form> <br>
+<div>{{ statusMsg }}</div>
